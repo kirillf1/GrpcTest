@@ -9,8 +9,8 @@ namespace Core.Repositories
 {
     public interface IPersonRepository
     {
-        public Task<Person> GetPersonByName<Person>(string name);
+        public Task<Persons.Person> GetPersonByName<Person>(string name);
         public Task<List<Person>> GetAllPersons();
-        public Task<Person> CreatePerson(string name,string password,int roleId);
+        public Task<Person> CreatePerson(string name,string password,int? roleId);
     }
 }

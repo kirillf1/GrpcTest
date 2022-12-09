@@ -9,7 +9,8 @@ namespace Core.Repositories
 {
     public interface IRoleRepository
     {
-        public Task<Role> GetRole();
-        public Task<Role> CreateRole(Role role);
+        public Task<List<Role>> GetRole();
+        public Task<Role> CreateRole(string name,IEnumerable<Permision> permisions);
+        
     }
 }

@@ -9,19 +9,30 @@ namespace Core.Repositories
 {
     public class PersonInMemoryRepository : IPersonRepository
     {
-        public Task<Person> CreatePerson(string name, string password, int roleId)
+        private static List<Person> persons = new List<Person>();
+        private RoleInMemoryRepository roleInMemoryRepository = new();
+        public async Task<Person> CreatePerson(string name, string password, int? roleId)
         {
-            throw new NotImplementedException();
+            Role? role = default;
+            if (roleId.HasValue) 
+            {
+                var roles = await roleInMemoryRepository.GetRole();
+                role = roles.FirstOrDefault(c => c.Id == roleId);
+            }
+            var person = new Person(persons.Count +1, name, password, role);
+            persons.Add(person);
+            return person;
         }
 
         public Task<List<Person>> GetAllPersons()
         {
-            throw new NotImplementedException();
+            return Task.FromResult( persons);
         }
 
-        public Task<Person> GetPersonByName<Person>(string name)
+        public Task<Persons.Person> GetPersonByName<Person>(string name)
         {
-            throw new NotImplementedException();
+            var person = persons.First(c => c.Name == name);
+            return Task.FromResult<Person>(person);
         }
         
     }
