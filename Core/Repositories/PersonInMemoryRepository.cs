@@ -17,7 +17,7 @@ namespace Core.Repositories
             if (roleId.HasValue) 
             {
                 var roles = await roleInMemoryRepository.GetRole();
-                role = roles.FirstOrDefault(c => c.Id == roleId);
+                role = roles.Find(c => c.Id == roleId);
             }
             var person = new Person(persons.Count +1, name, password, role);
             persons.Add(person);
@@ -26,13 +26,13 @@ namespace Core.Repositories
 
         public Task<List<Person>> GetAllPersons()
         {
-            return Task.FromResult( persons);
+            return Task.FromResult(persons);
         }
 
         public Task<Persons.Person> GetPersonByName<Person>(string name)
         {
             var person = persons.First(c => c.Name == name);
-            return Task.FromResult<Person>(person);
+            return Task.FromResult(person);
         }
         
     }

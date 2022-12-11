@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcService.Protos";
+package persons;
+
+message Person {
+  string Name = 1;
+  optional string RoleName = 2;
+}

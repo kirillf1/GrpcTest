@@ -17,10 +17,10 @@ namespace Core.Repositories
       
         private static void Seed()
         {
-            var editPermission = new Permision(1, "CanEdit");
-            var canWatchSomth = new Permision(2, "CanWatch");
-            Roles.Add(new Role(1, "Admin", new List<Permision> { canWatchSomth, editPermission }));
-            Roles.Add(new Role(2, "User", new List<Permision> { canWatchSomth }));
+            var editPermission = new Permission(1, PermissionTypes.CanEdit);
+            var canWatchSomth = new Permission(2, PermissionTypes.CanWatch);
+            Roles.Add(new Role(1, "Admin", new List<Permission> { canWatchSomth, editPermission }));
+            Roles.Add(new Role(2, "User", new List<Permission> { canWatchSomth }));
         }
 
         public Task<List<Role>> GetRole()
@@ -28,7 +28,7 @@ namespace Core.Repositories
             return Task.FromResult(Roles);
         }
 
-        public Task<Role> CreateRole(string name, IEnumerable<Permision> permisions)
+        public Task<Role> CreateRole(string name, IEnumerable<Permission> permisions)
         {
             var role = new Role(Roles.Count +1,name,permisions);
             Roles.Add(role);
