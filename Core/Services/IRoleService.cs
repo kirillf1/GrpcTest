@@ -10,6 +10,7 @@ namespace Core.Services
 {
     public interface IRoleService
     {
+        public Task<bool> HasPermitted(string roleName, string permission);
         public Task<List<RoleDto>> GetAllRoles();
         public Task CreateRole(RoleDto roleDto);
         public Task DeleteRole(string roleName);

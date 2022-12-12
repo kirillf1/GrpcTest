@@ -5,5 +5,36 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="UI.MainWindow"
         Title="UI">
-    Welcome to Avalonia!
+	<Grid ColumnDefinitions="Auto,*">
+		<StackPanel   VerticalAlignment="Stretch" Width="200" Grid.Column="0">
+			<Button IsVisible="False" Name="PersonsButton" Width="100" Content="Люди"></Button>
+		</StackPanel>
+		<Grid Grid.Column="1" RowDefinitions="Auto,*,*" Name="RegisterWindow">
+			<StackPanel>
+				<TextBlock HorizontalAlignment="Center" Width="200" Grid.Row="0" Background="Wheat" x:Name="PersonName" Text="Имя"></TextBlock>
+				<TextBlock HorizontalAlignment="Center" Width="200" Grid.Row="0" Background="Wheat" x:Name="RoleName" Text="Роль"></TextBlock>
+			</StackPanel>
+			<StackPanel Grid.Row="1" HorizontalAlignment="Center">
+				<Label>Регистрация</Label>
+				<TextBox Name="RegisterName" Margin="0,0,0,10" Watermark="Имя пользователя"></TextBox>
+				<TextBox Name="RegisterPassword" Watermark="Пароль"></TextBox>
+				<Label>Роль</Label>
+				<ComboBox Name="RoleSelect">
+					<ComboBox.ItemTemplate>
+						<DataTemplate>
+							<TextBlock Text="{Binding Name}"></TextBlock>
+						</DataTemplate>
+					</ComboBox.ItemTemplate>
+				</ComboBox>
+				<Button Name="RegisterButton" Content="Зарегистрироваться"></Button>
+			</StackPanel>
+			<StackPanel Grid.Row="2" HorizontalAlignment="Center">
+				<Label>Войти</Label>
+				<TextBox Name="LoginName" Margin="0,0,0,10" Watermark="Имя пользователя"></TextBox>
+				<TextBox Name="LoginPassword" Watermark="Пароль"></TextBox>
+				<Button Name="LoginButton" Content="Войти"></Button>
+			</StackPanel>
+			<UserControl Grid.Column="1" IsVisible="False" x:Name="Page"></UserControl>
+		</Grid>
+	</Grid>
 </Window>

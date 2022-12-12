@@ -1,10 +1,10 @@
 syntax = "proto3";
 package auth;
 import "persons.proto";
+
 option csharp_namespace = "GrpcService.Protos";
 
 service Auth {
-  // Sends a greeting
   rpc Login (LoginRequest) returns (persons.Person);
   rpc Register(RegisterRequest) returns (persons.Person);
 }

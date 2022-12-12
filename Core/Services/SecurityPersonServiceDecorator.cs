@@ -48,7 +48,7 @@ namespace Core.Services
             return await personService.GetAllPersons();
         }
 
-        public async Task<PersonWithPassword> GetPersonWithPassword(string personName)
+        public async Task<PersonWithPasswordDto> GetPersonWithPassword(string personName)
         {
             var person = await personContext.GetPersonInfo();
             if (person is null)

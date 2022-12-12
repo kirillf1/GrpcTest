@@ -29,7 +29,7 @@ namespace Core.Repositories
             return Task.FromResult(persons);
         }
 
-        public Task<Persons.Person> GetPersonByName<Person>(string name)
+        public Task<Persons.Person> GetPersonByName(string name)
         {
             var person = persons.First(c => c.Name == name);
             return Task.FromResult(person);

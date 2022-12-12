@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcService.Protos";
+package persons;
+import "google/protobuf/empty.proto";
+
+service PersonService {
+  rpc AddPerson(PersonCreate) returns (Person);
+  rpc DeletePerson(PersonName) returns (google.protobuf.Empty);
+  rpc GetAllPersons(google.protobuf.Empty) returns (stream Person);
+  rpc GetPersonWithPassword(PersonName) returns (PersonWithPassword);
+}
+message PersonCreate{
+	string Name = 1;
+    optional string RoleName = 2;
+	string Password = 3;
+}
+message PersonName{
+	string Name = 1;
+}
+message PersonWithPassword{
+  string Name = 1;
+  optional string RoleName = 2;
+  string Password = 3;
+}
+message Person {
+  string Name = 1;
+  optional string RoleName = 2;
+}

@@ -1,0 +1,20 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="UI.PersonUserControll">
+	<Grid RowDefinitions="Auto,*">
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="0" Height="100" >
+			<Button Content="Добавить" IsEnabled="{Binding CanEdit}"></Button>
+			<Button Content="Сохранить" IsEnabled="{Binding CanEdit}"></Button>
+		</StackPanel>
+		<ItemsRepeater VerticalAlignment="Stretch" Grid.Row="1" Items="{Binding Persons}">
+			<ItemsRepeater.ItemTemplate>
+				<DataTemplate>
+					<TextBox Text="{Binding Name}"></TextBox>
+				</DataTemplate>
+			</ItemsRepeater.ItemTemplate>
+		</ItemsRepeater>
+	</Grid>
+</UserControl>

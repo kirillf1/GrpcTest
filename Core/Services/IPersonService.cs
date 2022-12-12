@@ -10,7 +10,7 @@ namespace Core.Services
 {
     public interface IPersonService
     {
-        public Task<PersonWithPassword> GetPersonWithPassword(string personName);
+        public Task<PersonWithPasswordDto> GetPersonWithPassword(string personName);
         public Task<List<PersonDto>> GetAllPersons();
         public Task DeletePerson(string name);
         public Task AddPerson(string personName, string password, string? roleName = null);

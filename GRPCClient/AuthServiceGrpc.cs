@@ -1,24 +1,16 @@
 ﻿using Core.Contracts;
 using Core.Services;
-using Grpc.Core.Interceptors;
 using Grpc.Core;
-using Grpc.Net.Client;
-using GrpcService;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GrpcService.Protos;
 
 namespace GRPCClient
 {
-    public class AuthService : IAuthService
+    public class AuthServiceGrpc : IAuthService
     {
         private readonly Auth.AuthClient auth;
         private readonly ITokenProvider tokenProvider;
 
-        public AuthService(Auth.AuthClient auth,ITokenProvider tokenProvider)
+        public AuthServiceGrpc(Auth.AuthClient auth,ITokenProvider tokenProvider)
         {
             this.auth = auth;
             this.tokenProvider = tokenProvider;
@@ -30,7 +22,7 @@ namespace GRPCClient
                 Name = loginModel.Name,
                 Password = loginModel.Password
             });
-            if(!await SaveJWTToken(call) )
+            if(!await SaveJWT(call) )
             {
                 return default;
             }
@@ -51,7 +43,7 @@ namespace GRPCClient
                 Password = registerModel.Password,
                 RoleName = registerModel.Role
             });
-            if (!await SaveJWTToken(call))
+            if (!await SaveJWT(call))
             {
                 return default;
             }
@@ -62,7 +54,7 @@ namespace GRPCClient
                 RoleName = person.RoleName
             };
         }
-        private async Task<bool> SaveJWTToken(AsyncUnaryCall<Person> call)
+        private async Task<bool> SaveJWT(AsyncUnaryCall<Person> call)
         {
             Metadata headers = await call.ResponseHeadersAsync;
             var authHeader = headers.GetValue("Authorization");

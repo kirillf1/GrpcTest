@@ -14,7 +14,7 @@ namespace Core.Repositories
             Seed();
         }
         static List<Role> Roles = new List<Role>();
-      
+
         private static void Seed()
         {
             var editPermission = new Permission(1, PermissionTypes.CanEdit);
@@ -30,9 +30,14 @@ namespace Core.Repositories
 
         public Task<Role> CreateRole(string name, IEnumerable<Permission> permisions)
         {
-            var role = new Role(Roles.Count +1,name,permisions);
+            var role = new Role(Roles.Count + 1, name, permisions);
             Roles.Add(role);
             return Task.FromResult(role);
+        }
+
+        public Task<Role> GetRoleByName(string roleName)
+        {
+            return Task.FromResult(Roles.First(c => c.Name == roleName));
         }
     }
 }

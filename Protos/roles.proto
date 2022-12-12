@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcService";
+import "google/protobuf/empty.proto";
+package roles;
+
+
+service RoleService {
+  rpc GetAllRoles(google.protobuf.Empty) returns (stream RoleGrpc);
+  rpc HasPermitted(RoleNameWithPermission) returns(IsPermitted); 
+}
+message RoleNameWithPermission{
+	string RoleName = 1;
+	string Permission = 2;
+}
+message IsPermitted{
+	bool IsAllowed = 1;
+}
+message RoleGrpc {
+  string Name = 1;
+  repeated PermissionGrpc Permissions =2;
+}
+
+// The response message containing the greetings.
+message PermissionGrpc {
+  string Description = 1;
+  int32 Id = 2;
+}

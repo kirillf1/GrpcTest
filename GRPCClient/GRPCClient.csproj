@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -20,14 +20,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="..\GrpcService\Protos\auth.proto" GrpcServices="Client">
+    <Protobuf Include="..\Protos\auth.proto" GrpcServices="Client">
       <Link>Protos\auth.proto</Link>
     </Protobuf>
-    <Protobuf Include="..\GrpcService\Protos\greet.proto" GrpcServices="Client">
+    <Protobuf Include="..\Protos\greet.proto" GrpcServices="Client">
       <Link>Protos\greet.proto</Link>
     </Protobuf>
-    <Protobuf Include="..\GrpcService\Protos\persons.proto" GrpcServices="Client">
+    <Protobuf Include="..\Protos\persons.proto" GrpcServices="Client">
       <Link>Protos\persons.proto</Link>
+    </Protobuf>
+    <Protobuf Include="..\Protos\roles.proto" GrpcServices="Client">
+      <Link>Protos\roles.proto</Link>
     </Protobuf>
   </ItemGroup>
 
