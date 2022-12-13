@@ -2,7 +2,7 @@ using Avalonia.Controls;
 
 namespace UI
 {
-    public partial class PersonUserControll : UserControl
+    public partial class PersonUserControll : Window
     {
         public PersonUserControll()
         {

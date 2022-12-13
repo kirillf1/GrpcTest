@@ -12,7 +12,7 @@ namespace UI
         IPersonService personService;
         IRoleService roleService;
         IPersonContext personContext;
-        PersonUserControll personUserControll = new PersonUserControll();
+        PersonUserControll personUserControl;
         RoleDto? SelectedRole;
         public MainWindow()
         {
@@ -53,13 +53,9 @@ namespace UI
 
         private void PersonClick(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            var userControl = this.Get<UserControl>("Page");
-            personUserControll.DataContext = new PersonsViewModel(personService, personContext);
-            userControl.Content = personUserControll;
-            userControl.IsVisible = true;
-
-            var reg = this.Get<Grid>("RegisterWindow");
-            reg.IsVisible = false;
+            personUserControl = new PersonUserControll();
+            personUserControl.DataContext = new PersonsViewModel(personService, personContext);
+            personUserControl.Show();
 
         }
 
@@ -82,6 +78,8 @@ namespace UI
                 personName.Text = person.Name;
                 var personButton = this.Get<Button>("PersonsButton");
                 personButton.IsVisible = true;
+                var roleName = this.Get<TextBlock>("RoleName");
+                roleName.Text = person.RoleName;
             }
             catch { }
         }
@@ -97,6 +95,8 @@ namespace UI
                 personName.Text = person.Name;
                 var personButton = this.Get<Button>("PersonsButton");
                 personButton.IsVisible = true;
+                var roleName = this.Get<TextBlock>("RoleName");
+                roleName.Text = person.RoleName;
             }
             catch { }
         }
