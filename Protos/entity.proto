@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcService";
+package entity;
+import "google/protobuf/empty.proto";
+
+service EntityService {
+
+  rpc GetEntities (google.protobuf.Empty) returns (stream Entity);
+}
+
+message Entity {
+  string Data = 1;
+  int32 Id = 2;
+}
+
+

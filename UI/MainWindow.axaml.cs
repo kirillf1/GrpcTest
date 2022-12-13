@@ -14,12 +14,14 @@ namespace UI
         IPersonContext personContext;
         PersonUserControll personUserControl;
         RoleDto? SelectedRole;
+        GrpcChannel channel;
+        ITokenProvider tokenProvider;
         public MainWindow()
         {
             InitializeComponent();
-            var channel = GrpcChannel.ForAddress("https://localhost:7047");
+            channel = GrpcChannel.ForAddress("https://localhost:7047");
             channel.ConnectAsync();
-            var tokenProvider = new TokenProviderInMemory();
+            tokenProvider = new TokenProviderInMemory();
             roleService = new RoleService(new GrpcService.RoleService.RoleServiceClient(channel));
             personContext = new PersonJwtContext(roleService, tokenProvider);
             personService = new SecurityPersonServiceDecorator(
@@ -27,6 +29,9 @@ namespace UI
                 personContext);
             authService = new AuthServiceGrpc(
                      new GrpcService.Protos.Auth.AuthClient(channel), tokenProvider);
+
+
+
             var roleSelect = this.Get<ComboBox>("RoleSelect");
             roleSelect.PointerEnter+=RoleSelect_PointerEnter;
             roleSelect.SelectionChanged+=RoleSelect_SelectionChanged;
@@ -36,6 +41,20 @@ namespace UI
             loginButton.Click += Login;
             var personButton = this.Get<Button>("PersonsButton");
             personButton.Click += PersonClick;
+            var personInfoButton = this.Get<Button>("PersonInfoButton");
+            personInfoButton.Click += ShowPassword;
+            var dataButton = this.Get<Button>("DataButton");
+            dataButton.Click +=DataClick;
+        }
+
+        private void DataClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            var testDataService = new TestEnitityService(new GrpcService.EntityService.EntityServiceClient(channel), tokenProvider);
+            var sercurityService = new SercurityTestEntityServiceDecorator(testDataService,personContext);
+            var viewModel = new EnititesViewModel(sercurityService);
+            var window = new EnititesWindow();
+            window.DataContext = viewModel;
+            window.Show();
         }
 
         private void RoleSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -76,7 +95,7 @@ namespace UI
                 var personName = this.Get<TextBlock>("PersonName");
                 var person = await personContext.GetPersonInfo();
                 personName.Text = person.Name;
-                var personButton = this.Get<Button>("PersonsButton");
+                var personButton = this.Get<Button>("PersonInfoButton");
                 personButton.IsVisible = true;
                 var roleName = this.Get<TextBlock>("RoleName");
                 roleName.Text = person.RoleName;
@@ -93,13 +112,21 @@ namespace UI
                 var personName = this.Get<TextBlock>("PersonName");
                 var person = await personContext.GetPersonInfo();
                 personName.Text = person.Name;
-                var personButton = this.Get<Button>("PersonsButton");
+                var personButton = this.Get<Button>("PersonInfoButton");
                 personButton.IsVisible = true;
                 var roleName = this.Get<TextBlock>("RoleName");
                 roleName.Text = person.RoleName;
             }
             catch { }
         }
+
+        private void ShowPassword(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            var window = new PersonInfoWindow();
+            window.DataContext = new PersonInfoViewModel(personService, personContext);
+            window.Show();
+        }
+
 
 
     }

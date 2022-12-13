@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddGrpc();
 builder.Services.AddScoped<IPersonRepository, PersonInMemoryRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleInMemoryRepository>();
+builder.Services.AddScoped<ITestDataRepository, TestEntityRepositoryInMemory>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 app.UseMiddleware<JwtAuthMiddleware>();
@@ -18,5 +19,6 @@ app.MapGrpcService<GreeterService>();
 app.MapGrpcService<AuthService>();
 app.MapGrpcService<RolesService>();
 app.MapGrpcService<PersonsService>();
+app.MapGrpcService<EnitityService>();
 
 app.Run();

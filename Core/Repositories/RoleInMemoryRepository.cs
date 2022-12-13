@@ -17,10 +17,20 @@ namespace Core.Repositories
 
         private static void Seed()
         {
+            var enitityRep = new TestEntityRepositoryInMemory();
+            var entities = enitityRep.GetEnities().Result;
             var editPermission = new Permission(1, PermissionTypes.CanEdit);
             var canWatchSomth = new Permission(2, PermissionTypes.CanWatch);
-            Roles.Add(new Role(1, "Admin", new List<Permission> { canWatchSomth, editPermission }));
-            Roles.Add(new Role(2, "User", new List<Permission> { canWatchSomth }));
+            var adminRole = new Role(1, "Admin", new List<Permission> { canWatchSomth, editPermission }, Enumerable.Empty<PermissionData>());
+            var userRole = new Role(2, "User", new List<Permission> { canWatchSomth }, Enumerable.Empty<PermissionData>());
+            var unknownRole = new Role(3, "Unknown", new List<Permission>(), Enumerable.Empty<PermissionData>());
+            adminRole.AddDataPermission(new PermissionData(PermissionDataTypes.Entity, entities.Where(c => c.Content.Contains("Admin"))
+                .Select(c => c.Id)));
+            userRole.AddDataPermission(new PermissionData(PermissionDataTypes.Entity, entities.Where(c => c.Content.Contains("User"))
+               .Select(c => c.Id)));
+            Roles.Add(adminRole);
+            Roles.Add(userRole);
+            Roles.Add(unknownRole);
         }
 
         public Task<List<Role>> GetRole()
@@ -30,7 +40,7 @@ namespace Core.Repositories
 
         public Task<Role> CreateRole(string name, IEnumerable<Permission> permisions)
         {
-            var role = new Role(Roles.Count + 1, name, permisions);
+            var role = new Role(Roles.Count + 1, name, permisions,Enumerable.Empty<PermissionData>());
             Roles.Add(role);
             return Task.FromResult(role);
         }

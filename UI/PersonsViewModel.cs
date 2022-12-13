@@ -27,9 +27,6 @@ namespace UI
         }
         private async Task Init()
         {
-            var canWatch = await personContext.HasPermitted(PermissionTypes.CanWatch);
-            if (!canWatch)
-                return;
             var persons = await personService.GetAllPersons();
             Persons = new(persons);
             CanEdit = await personContext.HasPermitted(PermissionTypes.CanEdit);

@@ -44,7 +44,7 @@ namespace GrpcService.Services
             if (personContext is null)
                 throw new Exception();
             var caller = await personContext.GetPersonInfo();
-            if (caller is null || caller.Name.Equals(request.Name))
+            if (caller is null || !caller.Name.Equals(request.Name))
                 throw new Exception();
             var person = await personRepository.GetPersonByName(request.Name);
             return new PersonWithPassword() { Name = person.Name, Password = person.Password, RoleName = person.Role?.Name ?? "" };

@@ -7,7 +7,9 @@
         Title="UI">
 	<Grid ColumnDefinitions="Auto,*">
 		<StackPanel   VerticalAlignment="Stretch" Width="200" Grid.Column="0">
-			<Button IsVisible="False" Name="PersonsButton" Width="100" Content="Люди"></Button>
+			<Button Name="PersonsButton" Width="100" Content="Люди"></Button>
+			<Button IsVisible="False" Name="PersonInfoButton" Width="100" Content="Пароль"></Button>
+			<Button Name="DataButton" Width="100" Content="Данные"></Button>
 		</StackPanel>
 		<Grid Grid.Column="1" RowDefinitions="Auto,*,*" Name="RegisterWindow">
 			<StackPanel>

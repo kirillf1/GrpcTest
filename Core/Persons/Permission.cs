@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Persons
 {
-    // Можно разделить на разрешения глобальные например, можно редачить и создать класс разрешений по количеству данных 
+    
     public class Permission
     {
         public int Id { get; }

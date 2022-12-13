@@ -10,12 +10,21 @@ xmlns="https://github.com/avaloniaui"
 			<Button Content="Добавить" IsEnabled="{Binding CanEdit}"></Button>
 			<Button Content="Сохранить" IsEnabled="{Binding CanEdit}"></Button>
 		</StackPanel>
-		<ItemsRepeater Height="400" VerticalAlignment="Stretch" Grid.Row="1" Items="{Binding Persons}">
+		<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Height="400" Grid.Row="1">
+		<ItemsRepeater Items="{Binding Persons}">
 			<ItemsRepeater.ItemTemplate>
 				<DataTemplate>
+					<StackPanel HorizontalAlignment="Center">
+						<Label>Имя пользователя </Label>
 					<TextBox Width="200" HorizontalAlignment="Center" Text="{Binding Name}"></TextBox>
+						<Label>Роль </Label>
+				    <TextBox IsVisible="{Binding $parent[ItemsRepeater].DataContext.CanEdit}" Width="200" HorizontalAlignment="Center" Text="{Binding RoleName}"></TextBox>
+						<Border BorderBrush="Red" BorderThickness="2"></Border>
+
+					</StackPanel>
 				</DataTemplate>
 			</ItemsRepeater.ItemTemplate>
 		</ItemsRepeater>
+		</ScrollViewer>
 	</Grid>
 </Window>

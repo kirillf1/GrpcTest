@@ -20,6 +20,9 @@
     <Protobuf Include="..\Protos\auth.proto" GrpcServices="Server">
       <Link>Protos\auth.proto</Link>
     </Protobuf>
+    <Protobuf Include="..\Protos\entity.proto" GrpcServices="Server">
+      <Link>Protos\entity.proto</Link>
+    </Protobuf>
     <Protobuf Include="..\Protos\greet.proto" GrpcServices="Server">
       <Link>Protos\greet.proto</Link>
     </Protobuf>
