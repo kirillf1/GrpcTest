@@ -1,5 +1,5 @@
 ﻿using Core.Contracts;
-using Core.Persons;
+using Core.Permissions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Core.Services
+namespace Core.Persons
 {
     public class SecurityPersonServiceDecorator : IPersonService
     {
@@ -27,7 +27,7 @@ namespace Core.Services
                 // Просто показано для примера, можно возращать просто, можно изменить интерфейс IPersonService
                 // чтобы пользователю видно, что нет доступа 
                 throw new Exception("Пользователь не имеет прав");
-            await personService.AddPerson(personName,password,roleName);
+            await personService.AddPerson(personName, password, roleName);
         }
 
         public async Task DeletePerson(string name)
@@ -53,7 +53,7 @@ namespace Core.Services
             var person = await personContext.GetPersonInfo();
             if (person is null)
                 throw new Exception("Нет данных");
-            if(person.Name != personName)
+            if (person.Name != personName)
                 throw new Exception("Нет доступа к пользователю");
             return await personService.GetPersonWithPassword(personName);
         }

@@ -1,5 +1,4 @@
 ﻿using Core.Entities;
-using Core.Services;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;

@@ -1,12 +1,12 @@
 ﻿using Core.Contracts;
-using Core.Persons;
+using Core.Permissions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Services
+namespace Core.Roles
 {
     public interface IRoleService
     {

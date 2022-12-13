@@ -1,5 +1,5 @@
-﻿using Core.Persons;
-using Core.Services;
+﻿using Core.Permissions;
+using Core.Persons;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;

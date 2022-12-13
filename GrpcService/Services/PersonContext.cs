@@ -1,7 +1,7 @@
 ﻿using Core.Contracts;
+using Core.Permissions;
 using Core.Persons;
 using Core.Repositories;
-using Core.Services;
 
 namespace GrpcService.Services
 {

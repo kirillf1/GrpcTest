@@ -4,6 +4,10 @@ using Grpc.Net.Client;
 using GRPCClient;
 using UI.Services;
 using Core.Contracts;
+using Core.Roles;
+using Core.Persons;
+using Core.Entities;
+
 namespace UI
 {
     public partial class MainWindow : Window

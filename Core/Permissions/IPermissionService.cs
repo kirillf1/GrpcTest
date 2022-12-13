@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Persons
+namespace Core.Permissions
 {
-    public static class PermissionDataTypes
+    public interface IPermissionService
     {
-        public const string Entity = "Entity";
+        public Task<List<Permission>> GetPermissions();
     }
 }

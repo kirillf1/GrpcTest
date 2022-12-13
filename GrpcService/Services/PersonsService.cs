@@ -1,8 +1,10 @@
-﻿using Core.Repositories;
-using Core.Services;
+﻿using Core.Permissions;
+using Core.Persons;
+using Core.Roles;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using GrpcService.Protos;
+using Person = GrpcService.Protos.Person;
 
 namespace GrpcService.Services
 {
@@ -19,7 +21,7 @@ namespace GrpcService.Services
         public async override Task<Empty> DeletePerson(PersonName request, ServerCallContext context)
         {
             var personContext = GetPersonContextFromHeaders(context);
-            if (personContext is null || !await personContext.HasPermitted(Core.Persons.PermissionTypes.CanEdit))
+            if (personContext is null || !await personContext.HasPermitted(PermissionTypes.CanEdit))
                 throw new Exception("Cant delete");
             var persons = await personRepository.GetAllPersons();
             var personToDelete = persons.FirstOrDefault(c => c.Name == request.Name);
@@ -30,7 +32,7 @@ namespace GrpcService.Services
         public async override Task GetAllPersons(Empty request, IServerStreamWriter<Person> responseStream, ServerCallContext context)
         {
             var personContext = GetPersonContextFromHeaders(context);
-            if (personContext is null || !await personContext.HasPermitted(Core.Persons.PermissionTypes.CanWatch))
+            if (personContext is null || !await personContext.HasPermitted(PermissionTypes.CanWatch))
                 return;
             var persons = await personRepository.GetAllPersons();
             foreach (var person in persons)
@@ -52,7 +54,7 @@ namespace GrpcService.Services
         public override async Task<Person> AddPerson(PersonCreate request, ServerCallContext context)
         {
             var personContext = GetPersonContextFromHeaders(context);
-            if (personContext is null || !await personContext.HasPermitted(Core.Persons.PermissionTypes.CanEdit))
+            if (personContext is null || !await personContext.HasPermitted(PermissionTypes.CanEdit))
                 throw new Exception();
             int? roleId = null;
             if (request.HasRoleName)

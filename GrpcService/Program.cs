@@ -1,4 +1,6 @@
+using Core.Persons;
 using Core.Repositories;
+using Core.Roles;
 using GrpcService;
 using GrpcService.Services;
 

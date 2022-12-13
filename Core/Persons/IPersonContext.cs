@@ -1,12 +1,11 @@
 ﻿using Core.Contracts;
-using Core.Persons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Services
+namespace Core.Persons
 {
     public interface IPersonContext
     {

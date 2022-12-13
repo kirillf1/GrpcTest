@@ -1,4 +1,4 @@
-﻿using Core.Entities;
+﻿using Core.Permissions;
 using Core.Persons;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Services
+namespace Core.Entities
 {
     public class SercurityTestEntityServiceDecorator : ITestEntityService
     {

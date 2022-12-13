@@ -1,11 +1,13 @@
 ﻿using Core.Contracts;
-using Core.Repositories;
+using Core.Persons;
+using Core.Roles;
 using Core.Services;
 using Grpc.Core;
 using GrpcService.Protos;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using Person = GrpcService.Protos.Person;
 
 namespace GrpcService.Services
 {
@@ -29,9 +31,9 @@ namespace GrpcService.Services
             await context.WriteResponseHeadersAsync(new Metadata() { { "Authorization", GenerateToken(secret, person) } });
             return new Person { Name = person.Name, RoleName = person.Role?.Name ?? "" };
         }
-        public override async Task<Person> Register(RegisterRequest request, ServerCallContext context)
+        public override async Task<Protos.Person> Register(RegisterRequest request, ServerCallContext context)
         {
-            Core.Persons.Role? role = null;
+            Role? role = null;
             if (request.HasRoleName)
             {
                 var roles = await roleRepository.GetRole();

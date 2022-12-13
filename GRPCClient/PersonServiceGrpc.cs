@@ -1,4 +1,5 @@
 ﻿using Core.Contracts;
+using Core.Persons;
 using Core.Services;
 using Grpc.Core;
 using GrpcService.Protos;

@@ -1,6 +1,4 @@
 ﻿using Core.Contracts;
-using Core.Persons;
-using Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using GrpcService;
 using Grpc.Core;
+using Core.Permissions;
+using Core.Roles;
 
 namespace GRPCClient
 {

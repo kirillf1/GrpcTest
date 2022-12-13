@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Core.Permissions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Persons
+namespace Core.Roles
 {
     public class Role
     {
-        public Role(int id,string name, IEnumerable<Permission> permissions, IEnumerable<PermissionData> dataPermissions)
+        public Role(int id, string name, IEnumerable<Permission> permissions, IEnumerable<PermissionData> dataPermissions)
         {
             Id=id;
             Name = name;
@@ -29,7 +30,7 @@ namespace Core.Persons
         // это проблемный аспект, так как мы обращаемся по строке подумать, как это поменять
         public bool HasPermission(string description)
         {
-            return permissions.Any(p => p.Desctription.Equals(description,StringComparison.OrdinalIgnoreCase));
+            return permissions.Any(p => p.Desctription.Equals(description, StringComparison.OrdinalIgnoreCase));
         }
         public void AddDataPermission(PermissionData permision)
         {
@@ -38,7 +39,7 @@ namespace Core.Persons
         public IEnumerable<int> GetAvailableData(string permissionName)
         {
             var dataPermission = dataPermissions.FirstOrDefault(c => c.Name == permissionName);
-      
+
             return dataPermission?.DataIds ?? Enumerable.Empty<int>();
         }
     }

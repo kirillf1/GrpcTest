@@ -1,4 +1,4 @@
-﻿using Core.Repositories;
+﻿using Core.Roles;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using static GrpcService.RoleService;

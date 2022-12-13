@@ -1,11 +1,13 @@
-﻿using Core.Persons;
+﻿using Core.Permissions;
+using Core.Persons;
+using Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Repositories
+namespace Core.Roles
 {
     public class RoleInMemoryRepository : IRoleRepository
     {
@@ -40,7 +42,7 @@ namespace Core.Repositories
 
         public Task<Role> CreateRole(string name, IEnumerable<Permission> permisions)
         {
-            var role = new Role(Roles.Count + 1, name, permisions,Enumerable.Empty<PermissionData>());
+            var role = new Role(Roles.Count + 1, name, permisions, Enumerable.Empty<PermissionData>());
             Roles.Add(role);
             return Task.FromResult(role);
         }

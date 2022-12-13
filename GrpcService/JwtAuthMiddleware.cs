@@ -1,4 +1,4 @@
-﻿using Core.Repositories;
+﻿using Core.Persons;
 using GrpcService.Services;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;

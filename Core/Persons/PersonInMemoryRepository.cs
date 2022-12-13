@@ -1,11 +1,11 @@
-﻿using Core.Persons;
+﻿using Core.Roles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Repositories
+namespace Core.Persons
 {
     public class PersonInMemoryRepository : IPersonRepository
     {
@@ -14,7 +14,7 @@ namespace Core.Repositories
         public async Task<Person> CreatePerson(string name, string password, int? roleId)
         {
             Role? role = default;
-            if (roleId.HasValue) 
+            if (roleId.HasValue)
             {
                 var roles = await roleInMemoryRepository.GetRole();
                 role = roles.Find(c => c.Id == roleId);
@@ -29,11 +29,11 @@ namespace Core.Repositories
             return Task.FromResult(persons);
         }
 
-        public Task<Persons.Person> GetPersonByName(string name)
+        public Task<Person> GetPersonByName(string name)
         {
             var person = persons.First(c => c.Name == name);
             return Task.FromResult(person);
         }
-        
+
     }
 }
